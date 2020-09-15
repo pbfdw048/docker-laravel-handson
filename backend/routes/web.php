@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HelloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Laravel 8.x での書き方
+Route::get('/hello', [HelloController::class, 'index']);
+// // 上記と同じ結果
+// Route::get('/hello', 'App\Http\Controllers\HelloController@index');
+
+// // Laravel 7.x までの書き方(この書き方をしたい場合は、`RouteServiceProvider`の`$namespace`プロパティに'App\Http\Controllers'を追加すればいい、とリファレンスに書いてあったが、上手くいかなかった)
+// Route::get('/hello', 'HelloController@index');
