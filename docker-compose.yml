@@ -14,8 +14,6 @@ services:
       - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
     working_dir: /work
 
-
-    # 追記
   db:
     image: mysql:8.0
     volumes:
@@ -28,6 +26,19 @@ services:
       - MYSQL_ROOT_PASSWORD=secret
       - TZ=Asia/Tokyo
 
-# 追記
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOSTS=db
+      - PMA_USER=phper
+      - PMA_PASSWORD=secret
+    ports:
+      - "3000:80"
+    volumes:
+      - /sessions
+
 volumes:
   db-store:
