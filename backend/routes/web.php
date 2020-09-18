@@ -15,6 +15,7 @@ use App\Http\Controllers\HelloController;
 */
 
 Route::get('/', function () {
+    logger('welcome route.');
     return view('welcome');
 });
 
